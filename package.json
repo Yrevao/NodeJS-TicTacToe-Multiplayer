@@ -1,0 +1,20 @@
+{
+  "name": "websocket-chat",
+  "version": "0.0.1",
+  "description": "REST based chat website",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "*",
+    "express": "*",
+    "jest": "*",
+    "mongoose": "*",
+    "socket.io": "*",
+    "supertest": "*",
+    "node-mocks-http": "*"
+  }
+}
