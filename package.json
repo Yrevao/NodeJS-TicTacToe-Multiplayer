@@ -15,6 +15,7 @@
     "mongoose": "*",
     "socket.io": "*",
     "supertest": "*",
-    "node-mocks-http": "*"
+    "node-mocks-http": "*",
+    "enzyme": "*"
   }
 }
