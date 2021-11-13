@@ -19,6 +19,3 @@ test('testing how controller tests will work', () => {
 
     home.init(request,response);
 });
-/*
-
-*/

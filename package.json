@@ -1,21 +1,26 @@
 {
-  "name": "websocket-chat",
+  "name": "TicTacToe-Multiplayer",
   "version": "0.0.1",
-  "description": "REST based chat website",
-  "main": "index.js",
+  "description": "REST based TicTacToe",
+  "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "Babel": "*",
+    "babel-loader": "*",
     "chai": "*",
     "express": "*",
     "jest": "*",
-    "mongoose": "*",
+    "node-mocks-http": "*",
+    "react": "*",
+    "react-dom": "*",
     "socket.io": "*",
     "supertest": "*",
-    "node-mocks-http": "*",
-    "enzyme": "*"
+    "webpack": "^5.64.0",
+    "webpack-cli": "^4.9.1"
   }
 }
