@@ -4,6 +4,6 @@ const httpMocks = require('node-mocks-http');
 const app = require('../app.js');
 
 test('express responds properly', async () => {
-    const response = await request(app).get('/');
+    const response = await request(app).get('/test');
     expect(response.statusCode).to.equal(200);
 });

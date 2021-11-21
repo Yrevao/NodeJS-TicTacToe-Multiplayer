@@ -20,7 +20,9 @@
     "react-dom": "*",
     "socket.io": "*",
     "supertest": "*",
-    "webpack": "^5.64.0",
-    "webpack-cli": "^4.9.1"
+    "webpack": "*",
+    "webpack-cli": "*",
+    "css-loader": "*",
+    "html-webpack-plugin": "*"
   }
 }
