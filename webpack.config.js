@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './public/index.js',
+  entry: './public/index.jsx',
   mode: 'production',
   plugins: [
     new HtmlWebpackPlugin({
@@ -19,8 +19,13 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env', "@babel/preset-react"]
+          }
+        }
       },
       {
         test: /\.css$/i,

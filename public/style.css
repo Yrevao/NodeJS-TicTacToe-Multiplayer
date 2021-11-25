@@ -1,0 +1,10 @@
+.off {
+  border: none;
+  padding: 15px;
+  background-color: #FF0000;
+}
+.on {
+  border: none;
+  padding: 15px;
+  background-color: #00FF00;
+}

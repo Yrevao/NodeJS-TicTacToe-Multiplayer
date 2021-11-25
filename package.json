@@ -12,6 +12,8 @@
   "dependencies": {
     "Babel": "*",
     "babel-loader": "*",
+    "@babel/preset-env": "*",
+    "@babel/preset-react": "*",
     "chai": "*",
     "express": "*",
     "jest": "*",
@@ -23,6 +25,7 @@
     "webpack": "*",
     "webpack-cli": "*",
     "css-loader": "*",
+    "style-loader": "*",
     "html-webpack-plugin": "*"
   }
 }
