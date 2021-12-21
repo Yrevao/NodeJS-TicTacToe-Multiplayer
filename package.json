@@ -10,22 +10,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "Babel": "*",
-    "babel-loader": "*",
     "@babel/preset-env": "*",
     "@babel/preset-react": "*",
+    "Babel": "*",
+    "babel-loader": "*",
     "chai": "*",
+    "css-loader": "*",
     "express": "*",
+    "html-webpack-plugin": "*",
     "jest": "*",
     "node-mocks-http": "*",
     "react": "*",
     "react-dom": "*",
     "socket.io": "*",
+    "socket.io-client": "*",
+    "style-loader": "*",
     "supertest": "*",
     "webpack": "*",
-    "webpack-cli": "*",
-    "css-loader": "*",
-    "style-loader": "*",
-    "html-webpack-plugin": "*"
+    "webpack-bundle-analyzer": "*",
+    "webpack-cli": "*"
   }
 }
