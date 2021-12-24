@@ -1,9 +1,17 @@
 const { expect } = require('chai');
-const request = require('supertest');
-const httpMocks = require('node-mocks-http');
-const app = require('../app.js');
+const supertest = require('supertest');
+const server = require('../server.js');
+const request = supertest(server.app);
 
+// control test
 test('express responds properly', async () => {
-    const response = await request(app).get('/test');
-    expect(response.statusCode).to.equal(200);
+    const response = await request
+    .get('/test');
+    expect(response.text).to.equal('test 123');
 });
+
+// execute controller tests
+require('./controllers/join-test.js')(server.app);
+
+// close server so jest dosen't hang
+server.server.close();

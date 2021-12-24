@@ -19,7 +19,6 @@
     "express": "*",
     "html-webpack-plugin": "*",
     "jest": "*",
-    "node-mocks-http": "*",
     "react": "*",
     "react-dom": "*",
     "socket.io": "*",

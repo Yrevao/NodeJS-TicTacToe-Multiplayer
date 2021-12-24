@@ -56,7 +56,7 @@ const newMatch = () => {
   // match ID is reverse of socket.id
   const query = new URLSearchParams(window.location.search);
   query.set('match', `${socket.id}`.split('').reverse().join(''));
-  history.replaceState(null, null, "?"+query.toString());
+  history.replaceState(null, null, 'join'+'?'+query.toString());
 
   // attempt to join match
   joinMatch();
@@ -64,7 +64,7 @@ const newMatch = () => {
 
 // attempt to join match ID in query
 const joinMatch = () => {
-  request({ID: socket.id}, window.location.href)
+  request({player: socket.id}, window.location.href)
     .then(data => {
       console.table(data);
     });
