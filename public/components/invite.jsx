@@ -5,7 +5,7 @@ export default class Invite extends React.Component {
   render() {
     return(
       <h1>
-        This is the next page
+        Join Status: {this.props.status}
       </h1>
     )
   }

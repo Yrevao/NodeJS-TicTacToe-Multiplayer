@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const { io } = require("socket.io-client");
-const socket = io();
+const socket = io(window.location.origin);
 
 // page components
 import css from './style.css';
@@ -47,9 +47,22 @@ const init = () => {
   entry.id = 'root';
   document.body.appendChild(entry);
 
-  // render homepage
-  switchPage(<Homepage onNewMatch={newMatch} />);
+  // give socketIO time to connect before rendering anything
+  socket.on('connect', router);
 };
+
+// switch entry point component based on query properties rather than path
+const router = () => {
+  const query = new URLSearchParams(window.location.search);
+
+  // check property is valid by checking for null
+  if(query.get('match') != null) {
+    joinMatch();
+  }
+  else {
+    switchPage(<Homepage onNewMatch={newMatch} />);
+  }
+}
 
 // create a new match
 const newMatch = () => {
@@ -66,7 +79,17 @@ const newMatch = () => {
 const joinMatch = () => {
   request({player: socket.id}, window.location.href)
     .then(data => {
-      console.table(data);
+      switch(data.status) {
+        case 'host':
+          switchPage(<Invitepage status = 'host'/>);
+          break;
+        case 'opponent':
+          switchPage(<Invitepage status = 'opponent'/>);
+          break;
+        case 'error':
+          switchPage(<Invitepage status = 'error'/>);
+          break;
+      }
     });
 }
 
