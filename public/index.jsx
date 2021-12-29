@@ -4,7 +4,8 @@ const { io } = require("socket.io-client");
 const socket = io(window.location.origin);
 
 // page components
-import css from './style.css';
+import staticStyle from './style/dynamic.css';
+import dynamicStyle from './style/static.css';
 import Homepage from './components/home.jsx';
 import Invitepage from './components/invite.jsx';
 
@@ -37,6 +38,12 @@ const request = (data, url) => {
   });
 }
 
+// get match ID from query
+const getQueryMatch = () => {
+  const query = new URLSearchParams(window.location.search);
+
+  return query.get('match');
+}
 
 
 // UI controllers
@@ -53,10 +60,8 @@ const init = () => {
 
 // switch entry point component based on query properties rather than path
 const router = () => {
-  const query = new URLSearchParams(window.location.search);
-
   // check property is valid by checking for null
-  if(query.get('match') != null) {
+  if(getQueryMatch() != null) {
     joinMatch();
   }
   else {
@@ -75,21 +80,26 @@ const newMatch = () => {
   joinMatch();
 }
 
-// attempt to join match ID in query
+// attempt to join match ID in query on /join route
 const joinMatch = () => {
   request({player: socket.id}, window.location.href)
     .then(data => {
-      switch(data.status) {
-        case 'host':
-          switchPage(<Invitepage status = 'host'/>);
-          break;
-        case 'opponent':
-          switchPage(<Invitepage status = 'opponent'/>);
-          break;
-        case 'error':
-          switchPage(<Invitepage status = 'error'/>);
-          break;
+      if(!data.status.error) {
+        // socketIO event for associating socket with state
+        socket.emit('new');
+        // switch page based on if the player is the host or the opponent
+        switch(data.status) {
+          case 'host':
+            switchPage(<Invitepage/>);
+            break;
+          case 'opponent':
+            switchPage(<Setuppage/>);
+            break;
+        }
+        return;
       }
+      // error in joining match
+      //switchPage(<Errorpage/>);
     });
 }
 

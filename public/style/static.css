@@ -1,0 +1,24 @@
+#root {
+  font-family: 'Bahnschrift SemiBold';
+}
+
+@keyframes waitBob {
+  0% {color: black;}
+  50% {color: white;}
+  100% {color: black;}
+}
+.waitText {
+  text-align: center;
+  animation-name: waitBob;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+.copyBox {
+  display: flex;
+  justify-content: center;
+}
+.copyText {
+  background-color: grey;
+  padding: 30px;
+}
