@@ -1,7 +1,7 @@
-// methods for switching between controllers
-
+  // methods for switching between controllers
 // controller imports
 import * as c_home from './controllers/home.jsx';
+import * as c_invite from './controllers/invite.jsx';
 import * as c_setup from './controllers/setup.jsx';
 
 
@@ -9,7 +9,7 @@ import * as c_setup from './controllers/setup.jsx';
 // cross-method socket session
 let socketSession = null;
 
-// set socketIO session to avoid un-needed reconnection attempts; used since its easier to pass these methods to react components without needing arguments
+// set socketIO session to avoid un-needed reconnection attempts; also sets events
 export const setSocketSession = (setSocket) => {
   socketSession = setSocket;
 }
@@ -21,10 +21,23 @@ export const home = () => {
 
 // invite page with copy link button
 export const invite = () => {
-  c_setup.newMatch(socketSession);
+  c_invite.newMatch(socketSession);
+}
+
+// invite page without join attempt; for returning to invite page on player disconnect
+export const inviteNoJoin = () => {
+  c_invite.playAsHost(socketSession);
 }
 
 // used to attempt to join a match that already exists; match may be full
 export const join = () => {
-  c_setup.joinMatch(socketSession);
+  c_invite.joinMatch(socketSession);
+}
+
+export const opponentSetup = () => {
+  c_setup.startSetup(false, socketSession);
+}
+
+export const hostSetup = () => {
+  c_setup.startSetup(true, socketSession);
 }

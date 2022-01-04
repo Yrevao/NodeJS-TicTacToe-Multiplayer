@@ -5,6 +5,7 @@ describe('test server-side state', () => {
   test('state can associate player with match', () => {
     // join requests
     expect(state.join('player-ID-1', 'match-ID').count).to.equal(1);        // player id joins match id
+    expect(state.getMatch('player-ID-1')).to.equal('match-ID');             // player has joined correct match
     expect(state.join('player-ID-1', 'match-ID').error).to.equal(true);     // same player id cant join twice
     expect(state.join('player-ID-2', 'match-ID').count).to.equal(2);        // two players can join a match
     expect(state.join('player-ID-3', 'match-ID').error).to.equal(true);     // three players cannot join a match

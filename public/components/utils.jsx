@@ -10,20 +10,27 @@ export class ToggleButton extends React.Component {
     this.state = {gfxOn: false};
     this.mouseover = this.mouseover.bind(this);
     this.mouseout = this.mouseout.bind(this);
+    this.mouseclick = this.mouseclick.bind(this);
   }
 
   mouseover() {
-    this.setState({gfxOn: true});
+    this.setState(this.state.gfxOn ? {gfxOn: false} : {gfxOn: true});
   }
   mouseout() {
-    this.setState({gfxOn: false});
+    this.setState(this.state.gfxOn ? {gfxOn: false} : {gfxOn: true});
+  }
+  mouseclick() {
+    if(this.props.toggle)
+      this.setState(this.state.gfxOn ? {gfxOn: false} : {gfxOn: true});
+
+    this.props.click();
   }
 
   render() {
     let className = this.state.gfxOn ? 'on' : 'off';
 
     return(
-      <button className={className} onClick={this.props.click} onMouseOver={this.mouseover} onMouseOut={this.mouseout}>{this.props.text}</button>
+      <button className={className} onClick={this.mouseclick} onMouseOver={this.mouseover} onMouseOut={this.mouseout}>{this.props.text}</button>
     )
   }
 }
