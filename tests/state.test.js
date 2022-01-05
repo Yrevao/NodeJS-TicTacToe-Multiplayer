@@ -12,10 +12,12 @@ describe('test server-side state', () => {
   });
   test('state can setup match', () => {
     // setup requests
-    expect(state.ready('player-ID-1')).to.equal(false);                     // player readys up, returns true when both players in match are ready
+    expect(state.ready('player-ID-1').both).to.equal(false);                // player readys up, returns true when both players in match are ready
     expect(state.switch('player-ID-1')).to.equal('o');                      // host being the first player to join a match will be able to swtich if they go first or not; returns x or o based on if they are going first or not respectivly, returns e on error (playerid isnt host etc)
     expect(state.start('player-ID-1')).to.equal(false);                     // returns true when match starts successfully
-    expect(state.ready('player-ID-2')).to.equal(true);                      // both players are ready
+    expect(state.ready('player-ID-2').both).to.equal(true);                 // both players are ready
+    expect(state.ready('player-ID-2').ready).to.equal(false);               // unready player 2
+    expect(state.ready('player-ID-2').ready).to.equal(true);                // re-ready player 2
     expect(state.start('player-ID-1')).to.equal(true);                      // match starts
   });
   test('state can advance match', () => {

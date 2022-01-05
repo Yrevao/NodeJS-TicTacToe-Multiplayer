@@ -28,9 +28,22 @@ export class ToggleButton extends React.Component {
 
   render() {
     let className = this.state.gfxOn ? 'on' : 'off';
+    if(this.props.isOn)
+      className = this.state.gfxOn ? 'off' : 'on';
 
     return(
       <button className={className} onClick={this.mouseclick} onMouseOver={this.mouseover} onMouseOut={this.mouseout}>{this.props.text}</button>
+    )
+  }
+}
+
+export class ToggleBox extends React.Component {
+  render() {
+    const text = this.props.on ? this.props.onText : this.props.offText;
+    const className = this.props.on ? 'on' : 'off';
+
+    return(
+      <button className={className}>{text}</button>
     )
   }
 }
