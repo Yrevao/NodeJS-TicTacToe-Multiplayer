@@ -8,6 +8,12 @@ module.exports = (app) => {
       .send({type: 'ready', player: 'player-id-1'});
     expect(response.body.status).to.equal('ready'); // ready, notready, or false on error
   });
+  test('setup returns ready on successful player 2 ready', async () => {
+    const response = await request(app)
+      .post('/setup')
+      .send({type: 'ready', player: 'player-id-2'});
+    expect(response.body.status).to.equal('ready'); // ready, notready, or false on error
+  });
   test('setup returns notready on successful unready', async () => {
     const response = await request(app)
       .post('/setup')

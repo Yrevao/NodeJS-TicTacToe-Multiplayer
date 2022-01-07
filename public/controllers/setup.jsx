@@ -6,15 +6,22 @@ import * as routes from '../routes.jsx'
 import Setuppage from '../components/setup.jsx';
 import Invitepage from '../components/invite.jsx';
 
-let socketSession = null;
 
+
+let socketSession = null;
+let isFirstPlay = null;
+
+// entry point for the controller
 export const startSetup = (host, setSocket) => {
   socketSession = setSocket;
+  routes.setSocketSession(socketSession);
+  isFirstPlay = host;
 
   utils.switchPage(<Setuppage host={host} onReady={ready} onGoFirst={toggleFirst} ready={false} goFirst={host} opponentReady={false} opponentFirst={false}/>);
   handleEvents();
 }
 
+// handle socketIO events for this controller
 const handleEvents = () => {
   socketSession.on('leave', () => {
     routes.inviteNoJoin();
@@ -27,6 +34,9 @@ const handleEvents = () => {
       case 'switch':
         opponentFirst(data);
         break;
+      case 'start':
+        routes.startMatch(isFirstPlay);
+        break;
     }
   });
 }
@@ -35,7 +45,8 @@ const handleEvents = () => {
 const ready = () => {
   utils.request({player: socketSession.id, type: 'ready'}, window.location.origin + '/setup')
     .then(data => {
-      utils.switchPage(<Setuppage ready={(data.status == 'ready') ? true : false} />);
+      if(data.status != 'start')
+        utils.switchPage(<Setuppage ready={(data.status == 'ready') ? true : false} />);
     });
 }
 
@@ -43,14 +54,14 @@ const ready = () => {
 const toggleFirst = () => {
   utils.request({player: socketSession.id, type: 'switch'}, window.location.origin + '/setup')
     .then(data => {
-      utils.switchPage(<Setuppage goFirst={(data.status == 'x') ? true : false} />);
+      isFirstPlay = (data.status == 'x') ? true : false;
+      utils.switchPage(<Setuppage goFirst={isFirstPlay} />);
     })
 }
 
 // for when opponent is ready
 const opponentReady = (status) => {
   if(status.player == socketSession.id) return;
-
   utils.switchPage(<Setuppage opponentReady={(status.status == 'ready') ? true : false} />);
 }
 

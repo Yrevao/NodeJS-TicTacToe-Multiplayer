@@ -3,6 +3,7 @@
 import * as c_home from './controllers/home.jsx';
 import * as c_invite from './controllers/invite.jsx';
 import * as c_setup from './controllers/setup.jsx';
+import * as c_match from './controllers/match.jsx';
 
 
 
@@ -34,10 +35,16 @@ export const join = () => {
   c_invite.joinMatch(socketSession);
 }
 
+// match setup with opponent controls; opponent cannot switch first play
 export const opponentSetup = () => {
   c_setup.startSetup(false, socketSession);
 }
 
+// match setup with go first button included
 export const hostSetup = () => {
   c_setup.startSetup(true, socketSession);
+}
+
+export const startMatch = (isFirstPlay) => {
+  c_match.startMatch(socketSession, isFirstPlay);
 }

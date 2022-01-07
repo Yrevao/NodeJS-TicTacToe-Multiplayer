@@ -2,7 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 
-
+// button that can be graphically toggled
 export class ToggleButton extends React.Component {
   constructor(props) {
     super(props);
@@ -37,13 +37,14 @@ export class ToggleButton extends React.Component {
   }
 }
 
+// text box with two set states
 export class ToggleBox extends React.Component {
   render() {
     const text = this.props.on ? this.props.onText : this.props.offText;
     const className = this.props.on ? 'on' : 'off';
 
     return(
-      <button className={className}>{text}</button>
+      <span className={className}>{text}</span>
     )
   }
 }

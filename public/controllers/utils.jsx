@@ -9,7 +9,7 @@ export const switchPage = (page) => {
   ReactDOM.render(page, document.getElementById('root'));
 }
 
-// send formatted post request
+// send formatted post request with json data
 export const request = (data, url) => {
   return new Promise((resolve, reject) => {
     const params = {

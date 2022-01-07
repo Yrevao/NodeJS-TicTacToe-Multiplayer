@@ -14,6 +14,7 @@ test('express responds properly', async () => {
 // execute controller tests
 require('./controllers/join-test.js')(server.app);
 require('./controllers/setup-test.js')(server.app);
+require('./controllers/match-test.js')(server.app);
 
 // close server so jest dosen't hang
 server.server.close();
