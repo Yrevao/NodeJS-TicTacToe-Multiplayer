@@ -45,6 +45,6 @@ export const hostSetup = () => {
   c_setup.startSetup(true, socketSession);
 }
 
-export const startMatch = (isFirstPlay) => {
-  c_match.startMatch(socketSession, isFirstPlay);
+export const startMatch = (isFirstPlay, isHost) => {
+  c_match.startMatch(socketSession, isFirstPlay, isHost);
 }

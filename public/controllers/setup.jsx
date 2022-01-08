@@ -18,11 +18,11 @@ export const startSetup = (host, setSocket) => {
   isFirstPlay = host;
 
   utils.switchPage(<Setuppage host={host} onReady={ready} onGoFirst={toggleFirst} ready={false} goFirst={host} opponentReady={false} opponentFirst={false}/>);
-  handleEvents();
+  handleEvents(host);
 }
 
 // handle socketIO events for this controller
-const handleEvents = () => {
+const handleEvents = (host) => {
   socketSession.on('leave', () => {
     routes.inviteNoJoin();
   });
@@ -35,7 +35,7 @@ const handleEvents = () => {
         opponentFirst(data);
         break;
       case 'start':
-        routes.startMatch(isFirstPlay);
+        routes.startMatch(isFirstPlay, host);
         break;
     }
   });
