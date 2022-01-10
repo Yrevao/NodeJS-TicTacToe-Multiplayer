@@ -70,7 +70,7 @@ export default class Setup extends React.Component {
           <div class='interface'>
             <ToggleBox class='opponent' onText={'Opponent Ready'} offText={'Opponent Not Ready'} on={this.state.opponentReady} />
             <ToggleButton class='piece' staticStyle={true} toggle={true} onText={'o'} offText={'x'} click={this.state.onGoFirst} isOn={this.state.goFirst} />
-            <ToggleButton class='ready' staticStyle={true} toggle={true} text={`Ready`} click={this.state.onReady} isOn={this.state.ready} />
+            <ToggleButton class='ready' staticStyle={false} toggle={true} text={`Ready`} click={this.state.onReady} isOn={this.state.ready} />
           </div>
 
           <Board class='status' hover={false} board={this.state.board} onPlay={(i)=>{}} />
@@ -84,7 +84,7 @@ export default class Setup extends React.Component {
         <div class='interface'>
           <ToggleBox class='opponent' onText={'Opponent Ready'} offText={'Opponent Not Ready'} on={this.state.opponentReady} />
           <ToggleBox class='piece' staticStyle={true} onText={'x'} offText={'o'} on={this.state.goFirst} />
-          <ToggleButton class='ready' staticStyle={true} toggle={true} text={`Ready`} click={this.state.onReady} isOn={this.state.ready} />
+          <ToggleButton class='ready' staticStyle={false} toggle={true} text={`Ready`} click={this.state.onReady} isOn={this.state.ready} />
         </div>
 
         <Board class='status' hover={false} board={this.state.board} onPlay={(i)=>{}}/>

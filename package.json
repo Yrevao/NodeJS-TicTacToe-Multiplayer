@@ -1,11 +1,16 @@
 {
   "name": "TicTacToe-Multiplayer",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "REST based TicTacToe",
   "main": "server.js",
+  "engines": {
+    "node": "14.17.6",
+    "npm": "6.14.15"
+  },
   "scripts": {
     "test": "jest",
-    "build": "webpack"
+    "build": "webpack",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
