@@ -1,0 +1,27 @@
+.title {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: auto auto auto;
+  text-align: center;
+  transform: translateY(50%);
+  color: white;
+}
+.row1 {
+  font-size: 5vw;
+  grid-area: 1 / 2;
+  border-bottom: 0.25vw solid white;
+}
+.row2 {
+  font-size: 5vw;
+  grid-area: 2 / 2;
+}
+.row3 {
+  font-size: 5vw;
+  grid-area: 3 / 2;
+  border-top: 0.25vw solid white;
+}
+.startButton {
+  grid-area: 4 / 2;
+  display: flex;
+  justify-content: center;
+}

@@ -1,11 +1,7 @@
 const { io } = require("socket.io-client");
 const socket = io(window.location.origin);
 import * as routes from './routes.jsx';
-
-// css
-import staticStyle from './style/dynamic.css';
-import dynamicStyle from './style/static.css';
-
+import staticStyle from './style/static.css';
 
 
 const init = () => {

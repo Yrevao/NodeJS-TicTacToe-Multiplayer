@@ -36,13 +36,13 @@ export const join = () => {
 }
 
 // match setup with opponent controls; opponent cannot switch first play
-export const opponentSetup = () => {
-  c_setup.startSetup(false, socketSession);
+export const opponentSetup = (gameStatus) => {
+  c_setup.startSetup(gameStatus, false, socketSession);
 }
 
 // match setup with go first button included
-export const hostSetup = () => {
-  c_setup.startSetup(true, socketSession);
+export const hostSetup = (gameStatus) => {
+  c_setup.startSetup(gameStatus, true, socketSession);
 }
 
 export const startMatch = (isFirstPlay, isHost) => {

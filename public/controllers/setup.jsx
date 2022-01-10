@@ -12,12 +12,12 @@ let socketSession = null;
 let isFirstPlay = null;
 
 // entry point for the controller
-export const startSetup = (host, setSocket) => {
+export const startSetup = (gameStatus, host, setSocket) => {
   socketSession = setSocket;
   routes.setSocketSession(socketSession);
   isFirstPlay = host;
 
-  utils.switchPage(<Setuppage host={host} onReady={ready} onGoFirst={toggleFirst} ready={false} goFirst={host} opponentReady={false} opponentFirst={false}/>);
+  utils.switchPage(<Setuppage status={gameStatus} host={host} onReady={ready} onGoFirst={toggleFirst} ready={false} goFirst={host} opponentReady={false} opponentFirst={false}/>);
   handleEvents(host);
 }
 
@@ -46,7 +46,7 @@ const ready = () => {
   utils.request({player: socketSession.id, type: 'ready'}, window.location.origin + '/setup')
     .then(data => {
       if(data.status != 'start')
-        utils.switchPage(<Setuppage ready={(data.status == 'ready') ? true : false} />);
+        utils.switchPage(<Setuppage ready={(data.status == 'ready')} />);
     });
 }
 
@@ -54,7 +54,7 @@ const ready = () => {
 const toggleFirst = () => {
   utils.request({player: socketSession.id, type: 'switch'}, window.location.origin + '/setup')
     .then(data => {
-      isFirstPlay = (data.status == 'x') ? true : false;
+      isFirstPlay = (data.status == 'x');
       utils.switchPage(<Setuppage goFirst={isFirstPlay} />);
     })
 }
@@ -62,12 +62,13 @@ const toggleFirst = () => {
 // for when opponent is ready
 const opponentReady = (status) => {
   if(status.player == socketSession.id) return;
-  utils.switchPage(<Setuppage opponentReady={(status.status == 'ready') ? true : false} />);
+  utils.switchPage(<Setuppage opponentReady={(status.status == 'ready')} />);
 }
 
 // shows the opponent when the host switches who plays first
 const opponentFirst = (status) => {
   if(status.player == socketSession.id) return;
-
-  utils.switchPage(<Setuppage goFirst={(status.status == 'x') ? false : true} />);
+  
+  isFirstPlay = !(status.status == 'x');
+  utils.switchPage(<Setuppage goFirst={isFirstPlay} />);
 }

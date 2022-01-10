@@ -1,14 +1,18 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+import {ToggleButton} from './utils.jsx';
+import {ToggleBox} from './utils.jsx';
+import style from '../style/invite.css';
 
 
 
 export default class Invite extends React.Component {
   render() {
     return(
-      <div>
+      <div class='invite'>
+        <span class="sendToText"> Send this link to your opponent </span>
         <CopyBox link={window.location.href} />
-        <h1 class="waitText"> Waiting for Opponent </h1>
+        <span class="waitingText"> Waiting for Opponent </span>
       </div>
     )
   }
@@ -31,6 +35,9 @@ class CopyBox extends React.Component {
       .then(() => {
         this.setState({clipboard: true});
       });
+
+    // after 5 seconds reset toggle
+    setTimeout(() => {this.setState({clipboard: false})}, 5000);
   }
 
   render() {
@@ -39,10 +46,9 @@ class CopyBox extends React.Component {
 
     // show link and copy message
     return(
-      <div class="copyBox" onClick={this.onClick}>
-        <span class="copyText">{copyText}</span>
-        <br></br>
-        <span class="copyText">{this.props.link}</span>
+      <div class='copyBox' onClick={this.onClick}>
+        <span class='copyBoxItem'>{copyText}</span>
+        <span class='copyBoxItem'>{this.props.link}</span>
       </div>
     )
   }

@@ -15,7 +15,7 @@ export const startMatch = (setSocket, isFirstPlay, host) => {
   routes.setSocketSession(socketSession);
   piece = (isFirstPlay) ? 'x' : 'o';
 
-  utils.switchPage(<Matchpage yourTurn={isFirstPlay} board={[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']} onPlay={play} />);
+  utils.switchPage(<Matchpage yourTurn={isFirstPlay} piece={piece} board={[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']} onPlay={play} />);
   handleEvents(host);
 }
 
@@ -25,8 +25,8 @@ const handleEvents = (host) => {
   });
   socketSession.on('play', (data) => {
     if(data.status.winState != -1) {
-      if(host) routes.hostSetup();
-      else routes.opponentSetup();
+      if(host) routes.hostSetup(data.status);
+      else routes.opponentSetup(data.status);
       return;
     }
     if(data.player != socketSession.id)
@@ -34,6 +34,7 @@ const handleEvents = (host) => {
   });
 }
 
+// request server to make a play in a spot, update board with result
 const play = (spot) => {
   utils.request({player: socketSession.id, spot: spot}, window.location.origin + '/match')
     .then(data => {
@@ -42,6 +43,7 @@ const play = (spot) => {
     });
 }
 
+// update graphical board
 const updateBoard = (boardArr, turn) => {
-  utils.switchPage(<Matchpage yourTurn={(turn == piece) ? true : false} board={boardArr} />);
+  utils.switchPage(<Matchpage yourTurn={(turn == piece)} board={boardArr} />);
 }

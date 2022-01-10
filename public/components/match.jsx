@@ -1,7 +1,8 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 import {ToggleBox} from './utils.jsx';
-
+import {Board} from './utils.jsx';
+import style from '../style/match.css';
 
 
 export default class Match extends React.Component {
@@ -9,20 +10,24 @@ export default class Match extends React.Component {
     super(props);
 
     this.state = {
-      onPlay: this.props.onPlay
+      onPlay: this.props.onPlay,
+      piece: this.props.piece
     };
   }
 
   render() {
-    let boardArr = [];
-    for(let i = 0; i < 3; i++) {
-      let row = []
-      for(let j = 0; j < 3; j++) {
-        row.push(<button onClick = {() => {this.state.onPlay((i*3)+j)}}> |{this.props.board[(i*3)+j]}| </button>);
-      }
-      boardArr.push(<div> {row} </div>);
-    }
+    return(
+      <div class='match'>
+        <span class={this.props.yourTurn ? 'yourTurn' : 'oppTurn'}>
+          {this.props.yourTurn ? 'Your Turn' : 'Waiting for opponent'}
+        </span>
 
-    return(boardArr);
+        <Board hover={true} onPlay={this.state.onPlay} board={this.props.board} />
+
+        <span class='player'>
+          {`Player : ${this.state.piece}`}
+        </span>
+      </div>
+    );
   }
 }

@@ -4,10 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './public/index.jsx',
-  mode: 'development',
+  mode: 'production',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      title: 'Tic Tac Toe',
     }),
   ],
   output: {
