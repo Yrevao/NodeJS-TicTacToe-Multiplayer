@@ -16,12 +16,10 @@
   "license": "ISC",
   "dependencies": {
     "socket.io": "^4.4.1",
-    "express": "^4.17.2"
-  },
-  "devDependencies": {
+    "express": "^4.17.2",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
-    "Babel": "^0.0.1",
+    "@babel/core": "^7.16.7",
     "babel-loader": "^8.2.3",
     "chai": "^4.3.4",
     "css-loader": "^6.5.1",
