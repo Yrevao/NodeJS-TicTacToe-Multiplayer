@@ -1,1 +1,2 @@
-module.exports.port = 5000;
+module.exports.production = true;
+module.exports.port = (module.exports.production ? process.env.PORT : 3123);
