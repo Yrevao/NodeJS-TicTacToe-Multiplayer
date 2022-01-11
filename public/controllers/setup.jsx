@@ -29,10 +29,10 @@ const handleEvents = (host) => {
   socketSession.on('setup', (data) => {
     switch(data.type) {
       case 'ready':
-        opponentReady(data);
+        opponentReady(data.status);
         break;
       case 'switch':
-        opponentFirst(data);
+        opponentFirst(data.status);
         break;
       case 'start':
         routes.startMatch(isFirstPlay, host);
@@ -61,14 +61,11 @@ const toggleFirst = () => {
 
 // for when opponent is ready
 const opponentReady = (status) => {
-  if(status.player == socketSession.id) return;
-  utils.switchPage(<Setuppage opponentReady={(status.status == 'ready')} />);
+  utils.switchPage(<Setuppage opponentReady={(status == 'ready')} />);
 }
 
 // shows the opponent when the host switches who plays first
 const opponentFirst = (status) => {
-  if(status.player == socketSession.id) return;
-  
-  isFirstPlay = !(status.status == 'x');
+  isFirstPlay = !(status == 'x');
   utils.switchPage(<Setuppage goFirst={isFirstPlay} />);
 }

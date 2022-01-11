@@ -8,29 +8,26 @@ import Matchpage from '../components/match.jsx';
 
 
 let socketSession = null;
+let host = null;
 let piece = null;
 
-export const startMatch = (setSocket, isFirstPlay, host) => {
+export const startMatch = (setSocket, isFirstPlay, setHost) => {
   socketSession = setSocket;
   routes.setSocketSession(socketSession);
+  host = setHost;
   piece = (isFirstPlay) ? 'x' : 'o';
 
   utils.switchPage(<Matchpage yourTurn={isFirstPlay} piece={piece} board={[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']} onPlay={play} />);
-  handleEvents(host);
+  handleEvents();
 }
 
-const handleEvents = (host) => {
+const handleEvents = () => {
   socketSession.on('leave', (data) => {
     routes.inviteNoJoin();
   });
   socketSession.on('play', (data) => {
-    if(data.status.winState != -1) {
-      if(host) routes.hostSetup(data.status);
-      else routes.opponentSetup(data.status);
-      return;
-    }
-    if(data.player != socketSession.id)
-      updateBoard(data.status.board, data.status.turn);
+    // check for valid play before component update
+    updateView(data.status);
   });
 }
 
@@ -38,12 +35,20 @@ const handleEvents = (host) => {
 const play = (spot) => {
   utils.request({player: socketSession.id, spot: spot}, window.location.origin + '/match')
     .then(data => {
-      if(!data.error && data.winState == -1)
-        updateBoard(data.board, data.turn);
+      // only update board on a valid play
+      if(!data.error)
+        updateView(data);
     });
 }
 
-// update graphical board
-const updateBoard = (boardArr, turn) => {
-  utils.switchPage(<Matchpage yourTurn={(turn == piece)} board={boardArr} />);
+// update graphical board and handle wins
+const updateView = (status) => {
+  // return to setup on win
+  if(status.winState != -1) {
+    if(host) routes.hostSetup(status);
+    else routes.opponentSetup(status);
+  }
+  // otherwise update board
+  else
+    utils.switchPage(<Matchpage yourTurn={(status.turn == piece)} board={status.board} />);
 }
