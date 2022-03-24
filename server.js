@@ -6,7 +6,7 @@ const state = require('./lib/state.js');
 const settings = require('./settings/appSettings');
 
 // middlewares
-app.use(express.json());                          // json parser middleware
+app.use(express.json());                                 // json parser middleware
 const routes = require('./lib/routes')(app, io, state);  // allow defined app and io to be used in the separate routing module
 
 server.listen(settings.port);
