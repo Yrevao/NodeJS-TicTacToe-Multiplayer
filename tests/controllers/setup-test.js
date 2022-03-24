@@ -12,7 +12,7 @@ module.exports = (app) => {
     const response = await request(app)
       .post('/setup')
       .send({type: 'ready', player: 'player-id-2'});
-    expect(response.body.status).to.equal('ready'); // ready, notready, or false on error
+    expect(response.body.status).to.equal('start'); // ready, notready, or false on error
   });
   test('setup returns notready on successful unready', async () => {
     const response = await request(app)
