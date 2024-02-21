@@ -1,7 +1,7 @@
 # NodeJS-TicTacToe-Multiplayer
   This is a multiplayer TicTacToe game where players go against each other remotely in private matches.  
   I created this project to investigate test driven development and learn React.  
-  <del>The project is currently hosted here: https://tictactoe-multiplayer-3123.herokuapp.com/</del>
+  The project is currently hosted here: https://nodejs-tictactoe-multiplayer.onrender.com/
 
 ## Structure
   This project loosely follows REST principles in the sense that the client side and server side exist separately.  

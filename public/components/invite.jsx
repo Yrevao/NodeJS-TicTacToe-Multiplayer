@@ -18,7 +18,7 @@ export default class Invite extends React.Component {
   }
 }
 
-// text box that copys it's text to the clipboard when clicked
+// text box that copies it's text to the clipboard when clicked
 class CopyBox extends React.Component {
   constructor(props) {
     super(props);
